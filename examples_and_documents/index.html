@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<title>Template system</title>
+		<script type="text/javascript">
+			var Namespace = {};
+		</script>
+		<script type="text/javascript" src="Template.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var oTemplate = new Namespace.Template(),
+				oTemplateCompiled = null,
+				aArray = [],
+				sTemplate = '',
+				nStart = 0;
+
+			aArray.push('<div id="doc">');
+			aArray.push('	<div id="top-stuff" class="js-topbar">');
+			aArray.push('		<div id="banners" class="js-banners" style="clear:both;">');
+			aArray.push('			<!--set-->');
+			aArray.push('		<\/div>');
+			aArray.push('		<div id="top-bar-outer">');
+			aArray.push('			<div id="top-bar-bg"><!--set--><\/div>');
+			aArray.push('			<div id="top-bar">');
+			aArray.push('				<div class="top-bar-inside">');
+			aArray.push('					<div class="static-links">');
+			aArray.push('						<div id="logo">');
+			aArray.push('							<a href="/">Twitter<\/a><!--set-->');
+			aArray.push('						<\/div>');
+			aArray.push('						<form id="search-form" class="js-search-form" action="/search" method="GET">');
+			aArray.push('							<span class="glass js-search-action"><!--set--><\/span>');
+			aArray.push('							<input value="" placeholder="Buscar" name="q" id="search-query" type="text" />');
+			aArray.push('						<\/form>');
+			aArray.push('						<div id="global-nav"><!--set-->');
+			aArray.push('							<ul id="global-actions">');
+			aArray.push('							<\/ul>');
+			aArray.push('						<\/div>');
+			aArray.push('						<div id="sections"><!--set--><\/div>');
+			aArray.push('					<\/div>');
+			aArray.push('				<\/div>');
+			aArray.push('			<\/div>');
+			aArray.push('		<\/div>');
+			aArray.push('	<\/div>');
+			aArray.push('<\/div>');
+
+			sTemplate = aArray.join("");
+
+			nStart = +new Date();
+			oTemplateCompiled = oTemplate.compile(sTemplate);
+			console.log("ms: " + (+new Date() - nStart));
+
+			nStart = +new Date();
+			var nTimes = 1000;
+			while(--nTimes)
+			{
+				oTemplateCompiled.render({set: 999});
+			}
+			console.log("ms: " + (+new Date() - nStart));
+		</script>
+	</body>
+</html>
